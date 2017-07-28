@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<!--
+- events
+- passing your own arguments in events
+-->
+
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+<div id="app">
+    <button v-on:click="inc">Increase</button>
+    //$event is protected name if multiple args are passed
+    <button v-on:click="turboInc(4, $event)">Turbo Increase</button>
+    <p>{{ counter }}</p>
+    <p v-on:mousemove="coordinates" style="border: 1px solid red">Coordinates: {{ x }} / {{ y }}</p>
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            counter: 0,
+            x: 0,
+            y:0
+        },
+        methods: {
+            inc() {
+                this.counter++;
+            },
+            turboInc(step, event) {
+                //we can do something here with event object...
+                this.counter += step;
+            },
+            coordinates(event) {
+                //these are DOM related not vue, as well as events
+                this.x = event.clientX;
+                this.y = event.clientY;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
